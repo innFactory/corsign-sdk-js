@@ -1,0 +1,63 @@
+{
+	"version": "0.1.0",
+	"license": "MIT",
+	"main": "dist/index.js",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"src"
+	],
+	"engines": {
+		"node": ">=10"
+	},
+	"scripts": {
+		"start": "tsdx watch",
+		"build": "tsdx build",
+		"test": "tsdx test",
+		"lint": "tsdx lint",
+		"prepare": "tsdx build",
+		"size": "size-limit",
+		"analyze": "size-limit --why"
+	},
+	"peerDependencies": {},
+	"husky": {
+		"hooks": {
+			"pre-commit": "tsdx lint"
+		}
+	},
+	"prettier": {
+		"printWidth": 80,
+		"semi": true,
+		"singleQuote": true,
+		"trailingComma": "es5"
+	},
+	"name": "corsign-sdk-js",
+	"author": "Nicolas Schlecker",
+	"module": "dist/corsign-sdk.esm.js",
+	"size-limit": [
+		{
+			"path": "dist/corsign-sdk.cjs.production.min.js",
+			"limit": "10 KB"
+		},
+		{
+			"path": "dist/corsign-sdk.esm.js",
+			"limit": "10 KB"
+		}
+	],
+	"devDependencies": {
+		"@size-limit/preset-small-lib": "^4.10.2",
+		"@types/crypto-js": "^4.0.1",
+		"@types/jsonwebtoken": "^8.5.1",
+		"@types/qrcode": "^1.4.0",
+		"eslint-plugin-tsdoc": "^0.2.11",
+		"husky": "^6.0.0",
+		"size-limit": "^4.10.2",
+		"tsdx": "^0.14.1",
+		"tslib": "^2.1.0",
+		"typescript": "^4.2.3"
+	},
+	"dependencies": {
+		"jsonwebtoken": "^8.5.1",
+		"qrcode": "^1.4.4"
+	}
+}
