@@ -144,7 +144,7 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 	zip: Joi.string().optional(),
 	country: Joi.string()
 		.length(2)
-		.valid(Object.keys(getAlpha2Codes()))
+		.valid(...Object.keys(getAlpha2Codes()))
 		.optional(),
 }).or('email', 'phoneNumber');
 
