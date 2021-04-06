@@ -1,3 +1,6 @@
+import Joi from 'joi';
+import { Alpha2Code, getAlpha2Codes } from 'i18n-iso-countries';
+
 export type CorsignToken = {
 	/**
 	 * UUID (Unique User IDentifier) which could be used in third-party applications such as SORMAS, valid until a new test is performed.
@@ -54,7 +57,10 @@ export type CorsignPayload = {
  */
 export type CorsignPayloadPerson = {
 	/**
-	 * German ID number e.g.: LFC123ABC
+	 * One of:
+	 * - ID-Card number
+	 * - Driver's license number
+	 * - Passport number
 	 */
 	idCardNumber?: string;
 
@@ -88,16 +94,19 @@ export type CorsignPayloadPerson = {
 	email?: string;
 
 	/**
-	 * Phone number matching the following regex
-	 *
-	 * `\+?[0-9]+([0-9]|\/|\(|\)|\-| ){10,}`
+	 * Phone number
 	 */
 	phoneNumber?: string;
 
 	/**
-	 * Street
+	 * Adress line 1
 	 */
-	street?: string;
+	street1?: string;
+
+	/**
+	 * Adress line 2
+	 */
+	street2?: string;
 
 	/**
 	 * City
@@ -105,15 +114,39 @@ export type CorsignPayloadPerson = {
 	city?: string;
 
 	/**
-	 * 6 digit zip code
+	 * Zip code
 	 */
-	zip?: number;
+	zip?: string;
 
 	/**
 	 * 2 letter Alpha-2 country code as defined in [ISO 3166](https://www.iso.org/obp/ui/#search)
 	 */
-	country?: string;
+	country?: Alpha2Code;
 };
+
+export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
+	idCardNumber: Joi.string().optional(),
+	firstname: Joi.string().required(),
+	lastname: Joi.string().required(),
+	sex: Joi.string()
+		.valid('F', 'M', 'D')
+		.optional(),
+	birthday: Joi.number()
+		.integer()
+		.optional(),
+	email: Joi.string()
+		.email({ tlds: { allow: false } })
+		.optional(),
+	phoneNumber: Joi.string().optional(),
+	street1: Joi.string().optional(),
+	street2: Joi.string().optional(),
+	city: Joi.string().optional(),
+	zip: Joi.string().optional(),
+	country: Joi.string()
+		.length(2)
+		.valid(Object.keys(getAlpha2Codes()))
+		.optional(),
+}).or('email', 'phoneNumber');
 
 /**
  * Covid19 relevant data and optional third-party application data
@@ -127,7 +160,7 @@ export type CorsignPayloadInformation = {
 	/**
 	 * Type of test used e.g. pcr|antigen|...
 	 */
-	testType?: 'prc' | 'antigen' | string;
+	testType?: 'pcr' | 'antigen' | string;
 
 	/**
 	 * Wether or not the [CorsignPayloadPerson] was vaccinated or not
