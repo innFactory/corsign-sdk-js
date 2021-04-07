@@ -1,4 +1,10 @@
-export type {
+export {
+	GenerateSignedCorsignTokenResponse,
+	generateSignedCorsignToken,
+	validateCorsignToken,
+} from './api';
+
+export {
 	CorsignPayload,
 	CorsignPayloadInformation,
 	CorsignPayloadPerson,
@@ -10,10 +16,3 @@ export {
 	generateCorsignQrCode,
 	generateUnsignedCorsignToken,
 } from './utils';
-
-export type { GenerateSignedCorsignTokenResponse } from './api';
-
-export {
-	generateSignedCorsignToken,
-	validateCorsignToken,
-} from './api';
