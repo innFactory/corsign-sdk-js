@@ -9,18 +9,24 @@ export type CorsignToken = {
 
 	/**
 	 * The token expires after a pre-defined duration (e.g 24 hours) passed since the Sars-CoV-2 was done
+	 *
+	 * UTC timestamp
 	 */
-	exp?: string;
+	exp?: number;
 
 	/**
-	 * Date and time of the Sars-Cov-2 test
+	 * Date and time of the Sars-Cov-2 test **or** for unsigned tokens date of creation
+	 *
+	 * UTC timestamp
 	 */
-	iat?: string;
+	iat?: number;
 
 	/**
 	 * Valid not before Sars-Cov-2 test date and time
+	 *
+	 * UTC timestamp
 	 */
-	nbf?: string;
+	nbf?: number;
 
 	/**
 	 * Issuer of this Token
@@ -173,7 +179,12 @@ export type CorsignPayloadInformation = {
 	vaccine?: 'BNT162b2' | 'mRNA-1273' | string;
 
 	/**
-	 * Additional third-party app data
+	 * Additional third-party app data 1
 	 */
-	appData?: Record<string, string>;
+	appData1?: Record<string, string>;
+
+	/**
+	 * Additional third-party app data 2
+	 */
+	appData2?: Record<string, string>;
 };
