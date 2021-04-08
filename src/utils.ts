@@ -2,7 +2,7 @@ import { CorsignPayloadPerson, CorsignToken } from './token';
 import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode';
 
-const corsignValidationUrl = 'https://corsign.de/token';
+const corsignValidationUrl = 'https://corsign.de/v1/validate';
 
 /**
  *
@@ -36,7 +36,7 @@ export const decodeCorsignToken = (token: string): CorsignToken =>
 /**
  *
  * @param token Any {@link CorsignToken}
- * @param validationUrl The url the qr code should point to defaults to https://corsign.de/token/{token}
+ * @param validationUrl The url the qr code should point to defaults to https://corsign.de/v1/validate/{token}
  * @returns Data URI containing a representation of the QR Code image.
  */
 export const generateCorsignQrCode = async (

@@ -1,6 +1,7 @@
 import { CorsignPayload, CorsignToken } from './token';
+import axios, { AxiosError } from 'axios';
 
-const corsignApiUrl = 'https://corsign.de/v1';
+const corsignApiUrl = 'https://api.corsign.de/v1';
 
 export interface GenerateSignedCorsignTokenResponse {
 	/**
@@ -27,28 +28,24 @@ export const generateSignedCorsignToken = async (
 	signerToken: string,
 	tokenId: string,
 	apiUrl: string = corsignApiUrl
-): Promise<GenerateSignedCorsignTokenResponse> => {
-	const response = await fetch(`${apiUrl}/sign`, {
-		method: 'POST',
-		headers: {
-			'X-SIGNER-TOKEN': signerToken,
-			'X-TOKEN-ID': tokenId,
-			'content-type': 'application/json;charset=UTF-8',
-		},
-		body: JSON.stringify(payload),
-	});
-
-	if (response.ok) {
-		const jsonString = await response.text();
-		const data = JSON.parse(
-			jsonString
-		) as GenerateSignedCorsignTokenResponse;
-
-		return data;
-	} else {
-		return Promise.reject();
-	}
-};
+): Promise<GenerateSignedCorsignTokenResponse> =>
+	axios
+		.post(`${apiUrl}/sign`, {
+			headers: {
+				'X-SIGNER-TOKEN': signerToken,
+				'X-TOKEN-ID': tokenId,
+				'content-type': 'application/json;charset=UTF-8',
+			},
+			body: JSON.stringify(payload),
+		})
+		.then(response => {
+			if (response.status >= 200 && response.status <= 299) {
+				return response.data as GenerateSignedCorsignTokenResponse;
+			} else {
+				return Promise.reject(response.statusText);
+			}
+		})
+		.catch((err: AxiosError) => Promise.reject(err.message));
 
 /**
  *
@@ -59,15 +56,14 @@ export const generateSignedCorsignToken = async (
 export const validateCorsignToken = async (
 	token: string,
 	apiUrl: string = corsignApiUrl
-): Promise<CorsignToken> => {
-	const response = await fetch(`${apiUrl}/validate/${token}`);
-
-	if (response.ok) {
-		const jsonString = await response.text();
-		const data = JSON.parse(jsonString) as CorsignToken;
-
-		return data;
-	} else {
-		return Promise.reject();
-	}
-};
+): Promise<CorsignToken> =>
+	axios
+		.get(`${apiUrl}/validate/${token}`)
+		.then(response => {
+			if (response.status >= 200 && response.status <= 299) {
+				return response.data as CorsignToken;
+			} else {
+				return Promise.reject(response.statusText);
+			}
+		})
+		.catch((err: AxiosError) => Promise.reject(err.message));
