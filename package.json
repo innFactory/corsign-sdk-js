@@ -1,5 +1,5 @@
 {
-	"version": "0.1.5",
+	"version": "0.1.7",
 	"license": "MIT",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
@@ -30,11 +30,7 @@
 		"singleQuote": true,
 		"trailingComma": "es5"
 	},
-	"name": "@innfactory/corsign-sdk-js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/innFactory/corsign-sdk-js.git"
-	},
+	"name": "corsign-sdk-js",
 	"author": "Nicolas Schlecker",
 	"module": "dist/corsign-sdk.esm.js",
 	"size-limit": [
