@@ -30,7 +30,11 @@
 		"singleQuote": true,
 		"trailingComma": "es5"
 	},
-	"name": "corsign-sdk-js",
+	"name": "@innfactory/corsign-sdk-js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/innFactory/corsign-sdk-js.git"
+	},
 	"author": "Nicolas Schlecker",
 	"module": "dist/corsign-sdk.esm.js",
 	"size-limit": [
