@@ -1,61 +1,6 @@
 import Joi from 'joi';
 import { Alpha2Code, getAlpha2Codes } from 'i18n-iso-countries';
 
-export type CorsignToken = {
-	/**
-	 * UUID (Unique User IDentifier) which could be used in third-party applications such as SORMAS, valid until a new test is performed.
-	 */
-	sub?: string;
-
-	/**
-	 * The token expires after a pre-defined duration (e.g 24 hours) passed since the Sars-CoV-2 was done
-	 *
-	 * UTC timestamp
-	 */
-	exp?: number;
-
-	/**
-	 * Date and time of the Sars-Cov-2 test **or** for unsigned tokens date of creation
-	 *
-	 * UTC timestamp
-	 */
-	iat?: number;
-
-	/**
-	 * Valid not before Sars-Cov-2 test date and time
-	 *
-	 * UTC timestamp
-	 */
-	nbf?: number;
-
-	/**
-	 * Issuer of this Token
-	 */
-	iss: string;
-
-	/**
-	 * Place for the signer, can be used to store additional information for a third-party application
-	 */
-	aud: string;
-
-	/**
-	 * Token payload
-	 */
-	pld: CorsignPayload;
-};
-
-export type CorsignPayload = {
-	/**
-	 * {@link CorsignPayloadPerson}
-	 */
-	person: CorsignPayloadPerson;
-
-	/**
-	 * {@link CorsignPayloadInformation}
-	 */
-	information?: CorsignPayloadInformation;
-};
-
 /**
  * Personally identifiable information
  *
@@ -188,3 +133,82 @@ export type CorsignPayloadInformation = {
 	 */
 	appData2?: Record<string, string>;
 };
+
+export const corsignPayloadInformationSchema = Joi.object<
+	CorsignPayloadInformation
+>({
+	isNegative: Joi.boolean().optional(),
+	testType: Joi.string().optional(),
+	isVaccinated: Joi.boolean().optional(),
+	vaccine: Joi.string().optional(),
+});
+
+export type CorsignPayload = {
+	/**
+	 * {@link CorsignPayloadPerson}
+	 */
+	person: CorsignPayloadPerson;
+
+	/**
+	 * {@link CorsignPayloadInformation}
+	 */
+	information?: CorsignPayloadInformation;
+};
+
+export const corsignPayloadSchema = Joi.object<CorsignPayload>({
+	person: corsignPayloadPersonSchema,
+	information: corsignPayloadInformationSchema,
+});
+
+export type CorsignToken = {
+	/**
+	 * UUID (Unique User IDentifier) which could be used in third-party applications such as SORMAS, valid until a new test is performed.
+	 */
+	sub?: string;
+
+	/**
+	 * The token expires after a pre-defined duration (e.g 24 hours) passed since the Sars-CoV-2 was done
+	 *
+	 * UTC timestamp
+	 */
+	exp?: number;
+
+	/**
+	 * Date and time of the Sars-Cov-2 test **or** for unsigned tokens date of creation
+	 *
+	 * UTC timestamp
+	 */
+	iat?: number;
+
+	/**
+	 * Valid not before Sars-Cov-2 test date and time
+	 *
+	 * UTC timestamp
+	 */
+	nbf?: number;
+
+	/**
+	 * Issuer of this Token
+	 */
+	iss: string;
+
+	/**
+	 * Place for the signer, can be used to store additional information for a third-party application
+	 */
+	aud: string;
+
+	/**
+	 * Token payload
+	 */
+	pld: CorsignPayload;
+};
+
+export const corsignTokenSchema = Joi.object<CorsignToken>({
+	sub: Joi.number().optional(),
+	exp: Joi.number().optional(),
+	iat: Joi.number().optional(),
+	nbf: Joi.number().optional(),
+	iss: Joi.string().required(),
+	aud: Joi.string().required(),
+	pld: corsignPayloadSchema,
+});
