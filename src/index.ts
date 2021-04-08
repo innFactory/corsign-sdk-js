@@ -9,6 +9,10 @@ export {
 	CorsignPayloadInformation,
 	CorsignPayloadPerson,
 	CorsignToken,
+	corsignPayloadInformationSchema,
+	corsignPayloadPersonSchema,
+	corsignPayloadSchema,
+	corsignTokenSchema,
 } from './token';
 
 export {
