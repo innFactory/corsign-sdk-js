@@ -38,12 +38,15 @@ export const generateSignedCorsignToken = async (
 		body: JSON.stringify(payload),
 	});
 
-	const { data, errors } = await response.json();
-
 	if (response.ok) {
-		return data as GenerateSignedCorsignTokenResponse;
+		const jsonString = await response.text();
+		const data = JSON.parse(
+			jsonString
+		) as GenerateSignedCorsignTokenResponse;
+
+		return data;
 	} else {
-		return Promise.reject(errors);
+		return Promise.reject();
 	}
 };
 
@@ -59,11 +62,12 @@ export const validateCorsignToken = async (
 ): Promise<CorsignToken> => {
 	const response = await fetch(`${apiUrl}/validate/${token}`);
 
-	const { data, errors } = await response.json();
-
 	if (response.ok) {
-		return data as CorsignToken;
+		const jsonString = await response.text();
+		const data = JSON.parse(jsonString) as CorsignToken;
+
+		return data;
 	} else {
-		return Promise.reject(errors);
+		return Promise.reject();
 	}
 };
