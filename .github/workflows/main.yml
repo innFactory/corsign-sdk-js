@@ -9,7 +9,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Use Node ${{ matrix.node }}
+      - name: Use Node 12.x
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
@@ -25,7 +25,3 @@ jobs:
 
       - name: Build
         run: yarn build
-
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
