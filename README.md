@@ -1,3 +1,9 @@
+[![Version](https://img.shields.io/npm/v/corsign-sdk-js)](https://www.npmjs.com/package/corsign-sdk-js)
+
+
+# corsign-sdk-js
+
+
 # TSDX User Guide
 
 Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
