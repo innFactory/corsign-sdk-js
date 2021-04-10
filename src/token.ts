@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { Alpha2Code, getAlpha2Codes } from 'i18n-iso-countries';
+import { Alpha2Code } from 'i18n-iso-countries';
 
 /**
  * Personally identifiable information
@@ -76,7 +76,9 @@ export type CorsignPayloadPerson = {
 };
 
 export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
-	idCardNumber: Joi.string().optional(),
+	idCardNumber: Joi.string()
+		.allow('')
+		.optional(),
 	firstname: Joi.string().required(),
 	lastname: Joi.string().required(),
 	sex: Joi.string()
@@ -88,14 +90,25 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
 		.optional(),
-	phoneNumber: Joi.string().optional(),
-	street1: Joi.string().optional(),
-	street2: Joi.string().optional(),
-	city: Joi.string().optional(),
-	zip: Joi.string().optional(),
+	phoneNumber: Joi.string()
+		.allow('')
+		.optional(),
+	street1: Joi.string()
+		.allow('')
+		.optional(),
+	street2: Joi.string()
+		.allow('')
+		.optional(),
+	city: Joi.string()
+		.allow('')
+		.optional(),
+	zip: Joi.string()
+		.allow('')
+		.optional(),
 	country: Joi.string()
-		.length(2)
-		.valid(...Object.keys(getAlpha2Codes()))
+		.allow('')
+		// .length(2)
+		// .valid(...Object.keys(getAlpha2Codes()))
 		.optional(),
 }).or('email', 'phoneNumber');
 
@@ -141,6 +154,8 @@ export const corsignPayloadInformationSchema = Joi.object<
 	testType: Joi.string().optional(),
 	isVaccinated: Joi.boolean().optional(),
 	vaccine: Joi.string().optional(),
+	appData1: Joi.any().optional(),
+	appData2: Joi.any().optional(),
 });
 
 export type CorsignPayload = {
