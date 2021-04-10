@@ -204,7 +204,7 @@ export type CorsignToken = {
 };
 
 export const corsignTokenSchema = Joi.object<CorsignToken>({
-	sub: Joi.number().optional(),
+	sub: Joi.string().optional(),
 	exp: Joi.number().optional(),
 	iat: Joi.number().optional(),
 	nbf: Joi.number().optional(),
