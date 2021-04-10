@@ -83,9 +83,11 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 	firstname: Joi.string().required(),
 	lastname: Joi.string().required(),
 	sex: Joi.string()
+		.allow('')
 		.valid('F', 'M', 'D')
 		.optional(),
 	birthday: Joi.string()
+		.allow('')
 		.pattern(new RegExp(/\d{4}-\d{2}-\d{2}/))
 		.optional(),
 	email: Joi.string()
@@ -152,9 +154,13 @@ export const corsignPayloadInformationSchema = Joi.object<
 	CorsignPayloadInformation
 >({
 	isNegative: Joi.boolean().optional(),
-	testType: Joi.string().optional(),
+	testType: Joi.string()
+		.allow('')
+		.optional(),
 	isVaccinated: Joi.boolean().optional(),
-	vaccine: Joi.string().optional(),
+	vaccine: Joi.string()
+		.allow('')
+		.optional(),
 	appData1: Joi.any().optional(),
 	appData2: Joi.any().optional(),
 });

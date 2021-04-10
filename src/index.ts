@@ -20,3 +20,5 @@ export {
 	generateCorsignQrCode,
 	generateUnsignedCorsignToken,
 } from './utils';
+
+export { countryCodeMapping } from './form';
