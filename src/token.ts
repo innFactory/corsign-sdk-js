@@ -35,9 +35,10 @@ export type CorsignPayloadPerson = {
 	sex?: 'F' | 'M' | 'D';
 
 	/**
-	 * UTC Date in milliseconds since epoch
+	 * Format: yyyy-mm-dd
+	 * Pattern: \d{4}-\d{2}-\d{2}
 	 */
-	birthday?: number;
+	birthday?: string;
 
 	/**
 	 * Email address
@@ -84,8 +85,8 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 	sex: Joi.string()
 		.valid('F', 'M', 'D')
 		.optional(),
-	birthday: Joi.number()
-		.integer()
+	birthday: Joi.string()
+		.pattern(new RegExp(/\d{4}-\d{2}-\d{2}/))
 		.optional(),
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
