@@ -7,12 +7,32 @@ export interface GenerateSignedCorsignTokenResponse {
 	/**
 	 * Encoded Corsign-JWT
 	 */
-	token: string;
+	value: string;
+
+	/**
+	 * Info message
+	 */
+	info?: string;
 
 	/**
 	 * QRCode Data URI
 	 */
-	qrCode: string;
+	qr: string;
+
+	/**
+	 * Wether or not the confirmation email was sent successfully.
+	 */
+	emailSendSuccessful?: boolean;
+
+	/**
+	 * Might contain error message for why the email wasn't sent
+	 */
+	emailSendError?: string;
+
+	/**
+	 * Wether or not manual transmission of positive test cases is required.
+	 */
+	requireManualSendOfPositive: boolean;
 }
 
 /**
