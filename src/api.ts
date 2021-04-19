@@ -1,5 +1,5 @@
-import { CorsignPayload, CorsignToken } from './token';
 import axios, { AxiosError } from 'axios';
+import { CorsignPayload, CorsignToken } from './token';
 
 const corsignApiUrl = 'https://api.corsign.de/v1';
 
@@ -72,6 +72,8 @@ export const generateSignedCorsignToken = async (
  * @param token Encoded Corsign-JWT
  * @param apiUrl
  * @returns Decoded ({@link CorsignToken}) if successfull
+ * @returns reject with status 410 if token is valid but expired
+ * @returns reject with status 400 if token is invalid
  */
 export const validateCorsignToken = async (
 	token: string,
@@ -83,7 +85,7 @@ export const validateCorsignToken = async (
 			if (response.status >= 200 && response.status <= 299) {
 				return response.data as CorsignToken;
 			} else {
-				return Promise.reject(response.statusText);
+				return Promise.reject(response.status);
 			}
 		})
-		.catch((err: AxiosError) => Promise.reject(err.message));
+		.catch((err: AxiosError) => Promise.reject(err.response ? err.response.status : err.message));
