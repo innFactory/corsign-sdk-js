@@ -88,4 +88,6 @@ export const validateCorsignToken = async (
 				return Promise.reject(response.status);
 			}
 		})
-		.catch((err: AxiosError) => Promise.reject(err.response ? err.response.status : err.message));
+		.catch((err: AxiosError) =>
+			Promise.reject(err.response ? err.response.status : err.message)
+		);
