@@ -1,6 +1,7 @@
-import { CorsignPayloadPerson, CorsignToken } from './token';
 import jwt from 'jsonwebtoken';
 import QRCode from 'qrcode';
+import { CorsignPayloadPerson, CorsignToken } from './token';
+import { hasFormatOfCorsignToken } from './tokenFormatValidation';
 
 const corsignValidationUrl = 'https://corsign.de/v1/validate';
 
@@ -29,9 +30,16 @@ export const generateUnsignedCorsignToken = (
  *
  * @param token Encoded Corsign-JWT
  * @returns Decoded {@link CorsignToken}
+ * @returns null if format of token is no {@link CorsignToken}
  */
-export const decodeCorsignToken = (token: string): CorsignToken =>
-	jwt.decode(token) as CorsignToken;
+export const decodeCorsignToken = (token: string): CorsignToken | null => {
+	const decodedToken = jwt.decode(token);
+	if (hasFormatOfCorsignToken(decodedToken)) {
+		return decodedToken as CorsignToken;
+	} else {
+		return null;
+	}
+};
 
 /**
  *
