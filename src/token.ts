@@ -81,8 +81,10 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 		.optional(),
 	firstname: Joi.string().required(),
 	lastname: Joi.string().required(),
-	sex: Joi.string().valid('F', 'M', 'D'),
-	birthday: Joi.number(),
+	sex: Joi.string()
+		.valid('F', 'M', 'D')
+		.required(),
+	birthday: Joi.number().required(),
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
 		.optional(),
@@ -103,10 +105,39 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 		.optional(),
 	country: Joi.string()
 		.allow('')
-		// .length(2)
-		// .valid(...Object.keys(getAlpha2Codes()))
 		.optional(),
 }).or('email', 'phoneNumber');
+
+export const corsignPayloadPersonPositiveTestSchema = Joi.object<
+	CorsignPayloadPerson
+>({
+	idCardNumber: Joi.string()
+		.allow('')
+		.optional(),
+	firstname: Joi.string().required(),
+	lastname: Joi.string().required(),
+	sex: Joi.string()
+		.valid('F', 'M', 'D')
+		.required(),
+	birthday: Joi.number().required(),
+	email: Joi.string()
+		.email({ tlds: { allow: false } })
+		.optional(),
+	phoneNumber: Joi.string()
+		.allow('')
+		.optional(),
+	street1: Joi.string()
+		.allow('')
+		.optional(),
+	street2: Joi.string()
+		.allow('')
+		.optional(),
+	city: Joi.string().required(),
+	zip: Joi.string().required(),
+	country: Joi.string().required(),
+})
+	.or('email', 'phoneNumber')
+	.or('street1', 'street2');
 
 /**
  * Covid19 relevant data and optional third-party application data
@@ -171,7 +202,11 @@ export type CorsignPayload = {
 };
 
 export const corsignPayloadSchema = Joi.object<CorsignPayload>({
-	person: corsignPayloadPersonSchema,
+	person: Joi.alternatives().conditional('information.isNegative', {
+		is: false,
+		then: corsignPayloadPersonPositiveTestSchema,
+		otherwise: corsignPayloadPersonSchema,
+	}),
 	information: corsignPayloadInformationSchema,
 });
 
