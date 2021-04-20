@@ -42,6 +42,8 @@ describe('hasFormatOfCorsignToken', () => {
 				person: {
 					firstname: '',
 					lastname: '',
+					sex: 'M',
+					birthday: 0,
 				},
 			},
 		};
@@ -52,6 +54,8 @@ describe('hasFormatOfCorsignToken', () => {
 				person: {
 					firstname: '',
 					lastname: '',
+					sex: 'M',
+					birthday: 0,
 				},
 			},
 		};
@@ -73,6 +77,8 @@ describe('hasFormatOfCorsignToken', () => {
 				person: {
 					firstname: '',
 					lastname: '',
+					sex: 'M',
+					birthday: 0,
 				},
 			},
 		};
@@ -119,6 +125,8 @@ describe('hasFormatOfCorsignPayload', () => {
 			person: {
 				firstname: '',
 				lastname: '',
+				sex: 'M',
+				birthday: 0,
 			},
 			information: undefined,
 		};
@@ -126,6 +134,8 @@ describe('hasFormatOfCorsignPayload', () => {
 			person: {
 				firstname: '',
 				lastname: '',
+				sex: 'M',
+				birthday: 0,
 			},
 		};
 
@@ -139,6 +149,8 @@ describe('hasFormatOfCorsignPayload', () => {
 			person: {
 				firstname: '',
 				lastname: '',
+				sex: 'M',
+				birthday: 0,
 			},
 			information: {},
 		};
@@ -183,8 +195,8 @@ describe('hasFormatOfCorsignPayloadPerson', () => {
 			idCardNumber: undefined,
 			firstname: '',
 			lastname: '',
-			sex: undefined,
-			birthday: undefined,
+			sex: 'F',
+			birthday: 0,
 			email: undefined,
 			phoneNumber: undefined,
 			street1: undefined,
@@ -196,6 +208,8 @@ describe('hasFormatOfCorsignPayloadPerson', () => {
 		const value2: CorsignPayloadPerson = {
 			firstname: '',
 			lastname: '',
+			sex: 'M',
+			birthday: 0,
 		};
 
 		const isOfFormat = hasFormatOfCorsignPayloadPerson(value);

@@ -67,8 +67,8 @@ export const hasFormatOfCorsignPayloadPerson = (person: any): boolean => {
 		isDefinedButNoString(idCardNumber) ||
 		isNoString(firstname) ||
 		isNoString(lastname) ||
-		isDefinedButNoSex(sex) ||
-		isDefinedButNoNumber(birthday) ||
+		isNoSex(sex) ||
+		isNoNumber(birthday) ||
 		isDefinedButNoString(email) ||
 		isDefinedButNoString(phoneNumber) ||
 		isDefinedButNoString(street1) ||
@@ -121,11 +121,8 @@ const isDefinedButNoNumber = (value: any): boolean => {
 	return value !== undefined && typeof value !== 'number';
 };
 
-const isDefinedButNoSex = (value: any): boolean => {
-	return (
-		value !== undefined &&
-		!(value === 'F' || value === 'M' || value === 'D')
-	);
+const isNoSex = (value: any): boolean => {
+	return !(value === 'F' || value === 'M' || value === 'D');
 };
 
 const isDefinedButNoBoolean = (value: any): boolean => {
@@ -138,4 +135,8 @@ const isDefinedButNoObject = (value: any): boolean => {
 
 const isNoString = (value: any): boolean => {
 	return typeof value !== 'string';
+};
+
+const isNoNumber = (value: any): boolean => {
+	return typeof value !== 'number';
 };

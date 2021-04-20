@@ -1,5 +1,5 @@
-import Joi from 'joi';
 import { Alpha2Code } from 'i18n-iso-countries';
+import Joi from 'joi';
 
 /**
  * Personally identifiable information
@@ -32,12 +32,12 @@ export type CorsignPayloadPerson = {
 	/**
 	 * Female, Male or Diverse
 	 */
-	sex?: 'F' | 'M' | 'D';
+	sex: 'F' | 'M' | 'D';
 
 	/**
 	 * Timestamp
 	 */
-	birthday?: number;
+	birthday: number;
 
 	/**
 	 * Email address
@@ -81,11 +81,8 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 		.optional(),
 	firstname: Joi.string().required(),
 	lastname: Joi.string().required(),
-	sex: Joi.string()
-		.allow('')
-		.valid('F', 'M', 'D')
-		.optional(),
-	birthday: Joi.number().optional(),
+	sex: Joi.string().valid('F', 'M', 'D'),
+	birthday: Joi.number(),
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
 		.optional(),
