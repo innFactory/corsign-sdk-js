@@ -126,9 +126,7 @@ export const corsignPayloadPersonPositiveTestSchema = Joi.object<
 	phoneNumber: Joi.string()
 		.allow('')
 		.optional(),
-	street1: Joi.string()
-		.allow('')
-		.optional(),
+	street1: Joi.string().optional(),
 	street2: Joi.string()
 		.allow('')
 		.optional(),

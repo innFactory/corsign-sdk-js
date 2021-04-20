@@ -110,6 +110,82 @@ describe('person payload for positive test schema validation', () => {
 		);
 		expect(() => validationResult.error === undefined);
 	});
+
+	test('street1 and street2 empty string should fail validation', () => {
+		const personPayload: CorsignPayloadPerson = {
+			firstname: 'Max',
+			lastname: 'Mustermann',
+			email: 'max@mustermann.de',
+			sex: 'M',
+			birthday: 0,
+			street1: '',
+			street2: '',
+			zip: '123456',
+			city: 'Musterstadt',
+			country: 'DE',
+		};
+
+		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
+			personPayload
+		);
+		expect(validationResult.error).toBeDefined();
+	});
+
+	test('street1 and street2 filled in should pass validation', () => {
+		const personPayload: CorsignPayloadPerson = {
+			firstname: 'Max',
+			lastname: 'Mustermann',
+			email: 'max@mustermann.de',
+			sex: 'M',
+			birthday: 0,
+			street1: 'Musterstraße 1',
+			street2: 'Musterstraße 2',
+			zip: '123456',
+			city: 'Musterstadt',
+			country: 'DE',
+		};
+
+		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
+			personPayload
+		);
+		expect(validationResult.error).toBeUndefined();
+	});
+
+	test('street1 filled in should pass validation', () => {
+		const personPayload: CorsignPayloadPerson = {
+			firstname: 'Max',
+			lastname: 'Mustermann',
+			email: 'max@mustermann.de',
+			sex: 'M',
+			birthday: 0,
+			street1: 'Musterstraße 1',
+			street2: '',
+			zip: '123456',
+			city: 'Musterstadt',
+			country: 'DE',
+		};
+		const personPayload2: CorsignPayloadPerson = {
+			firstname: 'Max',
+			lastname: 'Mustermann',
+			email: 'max@mustermann.de',
+			sex: 'M',
+			birthday: 0,
+			street1: 'Musterstraße 1',
+			street2: undefined,
+			zip: '123456',
+			city: 'Musterstadt',
+			country: 'DE',
+		};
+
+		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
+			personPayload
+		);
+		const validationResult2 = corsignPayloadPersonPositiveTestSchema.validate(
+			personPayload2
+		);
+		expect(validationResult.error).toBeUndefined();
+		expect(validationResult2.error).toBeUndefined();
+	});
 });
 
 describe('payload schema validation', () => {
