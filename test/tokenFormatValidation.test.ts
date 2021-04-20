@@ -18,6 +18,18 @@ describe('hasFormatOfCorsignToken', () => {
 		const isOfFormat = hasFormatOfCorsignToken(value);
 		expect(isOfFormat).toBe(false);
 	});
+	test('no object as token', () => {
+		const value = '';
+		const value2 = 0;
+		const value3 = true;
+
+		const isOfFormat = hasFormatOfCorsignToken(value);
+		const isOfFormat2 = hasFormatOfCorsignToken(value2);
+		const isOfFormat3 = hasFormatOfCorsignToken(value3);
+		expect(isOfFormat).toBe(false);
+		expect(isOfFormat2).toBe(false);
+		expect(isOfFormat3).toBe(false);
+	});
 	test('minimal defined token object', () => {
 		const value: CorsignToken = {
 			sub: undefined,
@@ -90,6 +102,18 @@ describe('hasFormatOfCorsignPayload', () => {
 		const isOfFormat = hasFormatOfCorsignPayload(value);
 		expect(isOfFormat).toBe(false);
 	});
+	test('no object as payload', () => {
+		const value = '';
+		const value2 = 0;
+		const value3 = true;
+
+		const isOfFormat = hasFormatOfCorsignPayload(value);
+		const isOfFormat2 = hasFormatOfCorsignPayload(value2);
+		const isOfFormat3 = hasFormatOfCorsignPayload(value3);
+		expect(isOfFormat).toBe(false);
+		expect(isOfFormat2).toBe(false);
+		expect(isOfFormat3).toBe(false);
+	});
 	test('minimal defined payload object', () => {
 		const value: CorsignPayload = {
 			person: {
@@ -141,6 +165,18 @@ describe('hasFormatOfCorsignPayloadPerson', () => {
 
 		const isOfFormat = hasFormatOfCorsignPayloadPerson(value);
 		expect(isOfFormat).toBe(false);
+	});
+	test('no object as person', () => {
+		const value = '';
+		const value2 = 0;
+		const value3 = true;
+
+		const isOfFormat = hasFormatOfCorsignPayloadPerson(value);
+		const isOfFormat2 = hasFormatOfCorsignPayloadPerson(value2);
+		const isOfFormat3 = hasFormatOfCorsignPayloadPerson(value3);
+		expect(isOfFormat).toBe(false);
+		expect(isOfFormat2).toBe(false);
+		expect(isOfFormat3).toBe(false);
 	});
 	test('minimal defined values of person object', () => {
 		const value: CorsignPayloadPerson = {
@@ -206,6 +242,18 @@ describe('hasFormatOfCorsignPayloadInformation', () => {
 
 		const isOfFormat = hasFormatOfCorsignPayloadInformation(value);
 		expect(isOfFormat).toBe(false);
+	});
+	test('no object as information', () => {
+		const value = '';
+		const value2 = 0;
+		const value3 = true;
+
+		const isOfFormat = hasFormatOfCorsignPayloadInformation(value);
+		const isOfFormat2 = hasFormatOfCorsignPayloadInformation(value2);
+		const isOfFormat3 = hasFormatOfCorsignPayloadInformation(value3);
+		expect(isOfFormat).toBe(false);
+		expect(isOfFormat2).toBe(false);
+		expect(isOfFormat3).toBe(false);
 	});
 	test('minimal defined values of information object', () => {
 		const value: CorsignPayloadInformation = {

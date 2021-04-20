@@ -1,5 +1,5 @@
 export const hasFormatOfCorsignToken = (token: any): boolean => {
-	if (token === undefined) {
+	if (token === undefined || typeof token !== 'object') {
 		return false;
 	}
 
@@ -21,7 +21,7 @@ export const hasFormatOfCorsignToken = (token: any): boolean => {
 };
 
 export const hasFormatOfCorsignPayload = (payload: any): boolean => {
-	if (payload === undefined) {
+	if (payload === undefined || typeof payload !== 'object') {
 		return false;
 	}
 
@@ -44,7 +44,7 @@ export const hasFormatOfCorsignPayload = (payload: any): boolean => {
 };
 
 export const hasFormatOfCorsignPayloadPerson = (person: any): boolean => {
-	if (person === undefined) {
+	if (person === undefined || typeof person !== 'object') {
 		return false;
 	}
 
@@ -86,7 +86,7 @@ export const hasFormatOfCorsignPayloadPerson = (person: any): boolean => {
 export const hasFormatOfCorsignPayloadInformation = (
 	information: any
 ): boolean => {
-	if (information === undefined) {
+	if (information === undefined || typeof information !== 'object') {
 		return false;
 	}
 
