@@ -1,6 +1,7 @@
 import {
 	CorsignPayload,
 	CorsignPayloadPerson,
+	corsignPayloadPersonPositiveTestSchema,
 	corsignPayloadPersonSchema,
 	corsignPayloadSchema,
 } from '../src/token';
@@ -46,6 +47,65 @@ describe('person payload schema validation', () => {
 		};
 
 		const validationResult = corsignPayloadPersonSchema.validate(
+			personPayload
+		);
+		expect(() => validationResult.error === undefined);
+	});
+});
+
+describe('person payload for positive test schema validation', () => {
+	test('phoneNumber and email empty should fail validation', () => {
+		const personPayload: CorsignPayloadPerson = {
+			firstname: 'Max',
+			lastname: 'Mustermann',
+			sex: 'M',
+			birthday: 0,
+			street1: 'Musterstraße',
+			zip: '123456',
+			city: 'Musterstadt',
+			country: 'DE',
+		};
+
+		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
+			personPayload
+		);
+		expect(() => validationResult.error !== undefined);
+	});
+
+	test('with phoneNumber should pass validation ', () => {
+		const personPayload: CorsignPayloadPerson = {
+			firstname: 'Max',
+			lastname: 'Mustermann',
+			phoneNumber: '+49 123 456 78',
+			sex: 'M',
+			birthday: 0,
+			street1: 'Musterstraße',
+			zip: '123456',
+			city: 'Musterstadt',
+			country: 'DE',
+		};
+
+		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
+			personPayload
+		);
+		expect(() => validationResult.error === undefined);
+	});
+
+	test('with phoneNumber and email should pass validation ', () => {
+		const personPayload: CorsignPayloadPerson = {
+			firstname: 'Max',
+			lastname: 'Mustermann',
+			phoneNumber: '+49 123 456 78',
+			email: 'max@mustermann.de',
+			sex: 'M',
+			birthday: 0,
+			street1: 'Musterstraße',
+			zip: '123456',
+			city: 'Musterstadt',
+			country: 'DE',
+		};
+
+		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
 			personPayload
 		);
 		expect(() => validationResult.error === undefined);
