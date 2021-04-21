@@ -12,7 +12,7 @@ describe('person payload schema validation', () => {
 			firstname: 'Max',
 			lastname: 'Mustermann',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 		};
 
 		const validationResult = corsignPayloadPersonSchema.validate(
@@ -27,7 +27,7 @@ describe('person payload schema validation', () => {
 			lastname: 'Mustermann',
 			phoneNumber: '+49 123 456 78',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 		};
 
 		const validationResult = corsignPayloadPersonSchema.validate(
@@ -43,7 +43,7 @@ describe('person payload schema validation', () => {
 			phoneNumber: '+49 123 456 78',
 			email: 'max@mustermann.de',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 		};
 
 		const validationResult = corsignPayloadPersonSchema.validate(
@@ -59,7 +59,7 @@ describe('person payload for positive test schema validation', () => {
 			firstname: 'Max',
 			lastname: 'Mustermann',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 			street1: 'Musterstraße',
 			zip: '123456',
 			city: 'Musterstadt',
@@ -78,7 +78,7 @@ describe('person payload for positive test schema validation', () => {
 			lastname: 'Mustermann',
 			phoneNumber: '+49 123 456 78',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 			street1: 'Musterstraße',
 			zip: '123456',
 			city: 'Musterstadt',
@@ -98,7 +98,7 @@ describe('person payload for positive test schema validation', () => {
 			phoneNumber: '+49 123 456 78',
 			email: 'max@mustermann.de',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 			street1: 'Musterstraße',
 			zip: '123456',
 			city: 'Musterstadt',
@@ -117,7 +117,7 @@ describe('person payload for positive test schema validation', () => {
 			lastname: 'Mustermann',
 			email: 'max@mustermann.de',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 			street1: '',
 			street2: '',
 			zip: '123456',
@@ -137,7 +137,7 @@ describe('person payload for positive test schema validation', () => {
 			lastname: 'Mustermann',
 			email: 'max@mustermann.de',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 			street1: 'Musterstraße 1',
 			street2: 'Musterstraße 2',
 			zip: '123456',
@@ -157,7 +157,7 @@ describe('person payload for positive test schema validation', () => {
 			lastname: 'Mustermann',
 			email: 'max@mustermann.de',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 			street1: 'Musterstraße 1',
 			street2: '',
 			zip: '123456',
@@ -169,7 +169,7 @@ describe('person payload for positive test schema validation', () => {
 			lastname: 'Mustermann',
 			email: 'max@mustermann.de',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 			street1: 'Musterstraße 1',
 			street2: undefined,
 			zip: '123456',
@@ -196,7 +196,7 @@ describe('payload schema validation', () => {
 				lastname: 'Mustermann',
 				phoneNumber: '+49 123 456 78',
 				sex: 'M',
-				birthday: 0,
+				birthday: '2020-04-21',
 			},
 			information: {
 				isNegative: false,
@@ -214,7 +214,7 @@ describe('payload schema validation', () => {
 				lastname: 'Mustermann',
 				phoneNumber: '+49 123 456 78',
 				sex: 'M',
-				birthday: 0,
+				birthday: '2020-04-21',
 				street1: 'Musterstraße',
 				zip: '123456',
 				city: 'Musterstadt',
@@ -236,7 +236,7 @@ describe('payload schema validation', () => {
 				lastname: 'Mustermann',
 				phoneNumber: '+49 123 456 78',
 				sex: 'M',
-				birthday: 0,
+				birthday: '2020-04-21',
 			},
 			information: {
 				isNegative: true,

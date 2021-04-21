@@ -43,7 +43,7 @@ describe('hasFormatOfCorsignToken', () => {
 					firstname: '',
 					lastname: '',
 					sex: 'M',
-					birthday: 0,
+					birthday: '2020-04-21',
 				},
 			},
 		};
@@ -55,7 +55,7 @@ describe('hasFormatOfCorsignToken', () => {
 					firstname: '',
 					lastname: '',
 					sex: 'M',
-					birthday: 0,
+					birthday: '2020-04-21',
 				},
 			},
 		};
@@ -78,7 +78,7 @@ describe('hasFormatOfCorsignToken', () => {
 					firstname: '',
 					lastname: '',
 					sex: 'M',
-					birthday: 0,
+					birthday: '2020-04-21',
 				},
 			},
 		};
@@ -126,7 +126,7 @@ describe('hasFormatOfCorsignPayload', () => {
 				firstname: '',
 				lastname: '',
 				sex: 'M',
-				birthday: 0,
+				birthday: '2020-04-21',
 			},
 			information: undefined,
 		};
@@ -135,7 +135,7 @@ describe('hasFormatOfCorsignPayload', () => {
 				firstname: '',
 				lastname: '',
 				sex: 'M',
-				birthday: 0,
+				birthday: '2020-04-21',
 			},
 		};
 
@@ -150,7 +150,7 @@ describe('hasFormatOfCorsignPayload', () => {
 				firstname: '',
 				lastname: '',
 				sex: 'M',
-				birthday: 0,
+				birthday: '2020-04-21',
 			},
 			information: {},
 		};
@@ -196,7 +196,7 @@ describe('hasFormatOfCorsignPayloadPerson', () => {
 			firstname: '',
 			lastname: '',
 			sex: 'F',
-			birthday: 0,
+			birthday: '2020-04-21',
 			email: undefined,
 			phoneNumber: undefined,
 			street1: undefined,
@@ -209,7 +209,7 @@ describe('hasFormatOfCorsignPayloadPerson', () => {
 			firstname: '',
 			lastname: '',
 			sex: 'M',
-			birthday: 0,
+			birthday: '2020-04-21',
 		};
 
 		const isOfFormat = hasFormatOfCorsignPayloadPerson(value);
@@ -223,7 +223,7 @@ describe('hasFormatOfCorsignPayloadPerson', () => {
 			firstname: '',
 			lastname: '',
 			sex: 'F',
-			birthday: 0,
+			birthday: '2020-04-21',
 			email: '',
 			phoneNumber: '',
 			street1: '',

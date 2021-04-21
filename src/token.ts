@@ -1,6 +1,5 @@
 import { Alpha2Code } from 'i18n-iso-countries';
 import Joi from 'joi';
-
 /**
  * Personally identifiable information
  *
@@ -32,12 +31,12 @@ export type CorsignPayloadPerson = {
 	/**
 	 * Female, Male or Diverse
 	 */
-	sex: 'F' | 'M' | 'D';
+	sex?: 'F' | 'M' | 'D';
 
 	/**
-	 * Timestamp
+	 * Timestamp YYYY-MM-DD
 	 */
-	birthday: number;
+	birthday?: string;
 
 	/**
 	 * Email address
@@ -83,8 +82,8 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 	lastname: Joi.string().required(),
 	sex: Joi.string()
 		.valid('F', 'M', 'D')
-		.required(),
-	birthday: Joi.number().required(),
+		.optional(),
+	birthday: Joi.string().optional(),
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
 		.optional(),
@@ -118,8 +117,8 @@ export const corsignPayloadPersonPositiveTestSchema = Joi.object<
 	lastname: Joi.string().required(),
 	sex: Joi.string()
 		.valid('F', 'M', 'D')
-		.required(),
-	birthday: Joi.number().required(),
+		.optional(),
+	birthday: Joi.string().optional(),
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
 		.optional(),
@@ -130,9 +129,9 @@ export const corsignPayloadPersonPositiveTestSchema = Joi.object<
 	street2: Joi.string()
 		.allow('')
 		.optional(),
-	city: Joi.string().required(),
-	zip: Joi.string().required(),
-	country: Joi.string().required(),
+	city: Joi.string().optional(),
+	zip: Joi.string().optional(),
+	country: Joi.string().optional(),
 })
 	.or('email', 'phoneNumber')
 	.or('street1', 'street2');
