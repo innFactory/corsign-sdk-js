@@ -36,7 +36,7 @@ export type CorsignPayloadPerson = {
 	/**
 	 * Timestamp YYYY-MM-DD
 	 */
-	birthday?: string;
+	birthday: string;
 
 	/**
 	 * Email address
@@ -83,7 +83,7 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 	sex: Joi.string()
 		.valid('F', 'M', 'D')
 		.optional(),
-	birthday: Joi.string().optional(),
+	birthday: Joi.string().required(),
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
 		.optional(),
