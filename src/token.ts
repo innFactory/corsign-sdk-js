@@ -169,6 +169,11 @@ export type CorsignPayloadInformation = {
 	 * Additional third-party app data 2
 	 */
 	appData2?: Record<string, string>;
+
+	/**
+	 * Wether or not the [CorsignPayloadPerson] is immune or not
+	 */
+	isImmune?: boolean;
 };
 
 export const corsignPayloadInformationSchema = Joi.object<
