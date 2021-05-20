@@ -102,6 +102,7 @@ export const hasFormatOfCorsignPayloadInformation = (
 		vaccine,
 		appData1,
 		appData2,
+		isImmune,
 	} = information;
 
 	if (
@@ -115,7 +116,8 @@ export const hasFormatOfCorsignPayloadInformation = (
 		isDefinedButNoBoolean(isVaccinated) ||
 		isDefinedButNoString(vaccine) ||
 		isDefinedButNoObject(appData1) ||
-		isDefinedButNoObject(appData2)
+		isDefinedButNoObject(appData2) ||
+		isDefinedButNoBoolean(isImmune)
 	) {
 		return false;
 	}
