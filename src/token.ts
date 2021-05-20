@@ -141,14 +141,44 @@ export const corsignPayloadPersonPositiveTestSchema = Joi.object<
  */
 export type CorsignPayloadInformation = {
 	/**
+	 * Firstname and lastname of the person who carried out the test
+	 */
+	carriedOutBy?: string;
+
+	/**
+	 * Test responsibility
+	 */
+	creatorType?: 'on-site' | 'company' | 'service-provider' | string;
+
+	/**
 	 * Wether or not the administered SarS-CoV-2 test was negative or not
 	 */
 	isNegative?: boolean;
 
 	/**
-	 * Type of test used e.g. pcr|antigen|...
+	 * Wheter or not the administered SarS-CoV-2 test was invalid or not
 	 */
-	testType?: 'pcr' | 'antigen' | string;
+	invalid?: boolean;
+
+	/**
+	 * Type of test used e.g. pcr-test|pcr-rapid-test|antigen-rapid-test|ag-rapid-test-w-supervision|...
+	 */
+	testType?:
+		| 'pcr-test'
+		| 'pcr-rapid-test'
+		| 'antigen-rapid-test'
+		| 'ag-rapid-test-w-supervision'
+		| string;
+
+	/**
+	 * Name of the test
+	 */
+	testName?: string;
+
+	/**
+	 * Manufacturer of the test
+	 */
+	testManufacturer?: string;
 
 	/**
 	 * Wether or not the [CorsignPayloadPerson] was vaccinated or not
@@ -174,8 +204,21 @@ export type CorsignPayloadInformation = {
 export const corsignPayloadInformationSchema = Joi.object<
 	CorsignPayloadInformation
 >({
+	carriedOutBy: Joi.string()
+		.allow('')
+		.optional(),
+	creatorType: Joi.string()
+		.allow('')
+		.optional(),
 	isNegative: Joi.boolean().optional(),
+	invalid: Joi.boolean().optional(),
 	testType: Joi.string()
+		.allow('')
+		.optional(),
+	testName: Joi.string()
+		.allow('')
+		.optional(),
+	testManufacturer: Joi.string()
 		.allow('')
 		.optional(),
 	isVaccinated: Joi.boolean().optional(),

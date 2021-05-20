@@ -91,6 +91,11 @@ export const hasFormatOfCorsignPayloadInformation = (
 	}
 
 	const {
+		carriedOutBy,
+		creatorType,
+		invalid,
+		testName,
+		testManufacturer,
 		isNegative,
 		testType,
 		isVaccinated,
@@ -100,6 +105,11 @@ export const hasFormatOfCorsignPayloadInformation = (
 	} = information;
 
 	if (
+		isDefinedButNoString(carriedOutBy) ||
+		isDefinedButNoString(creatorType) ||
+		isDefinedButNoString(testName) ||
+		isDefinedButNoString(testManufacturer) ||
+		isDefinedButNoBoolean(invalid) ||
 		isDefinedButNoBoolean(isNegative) ||
 		isDefinedButNoString(testType) ||
 		isDefinedButNoBoolean(isVaccinated) ||
