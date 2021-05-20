@@ -90,48 +90,13 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 	phoneNumber: Joi.string()
 		.allow('')
 		.optional(),
-	street1: Joi.string()
-		.allow('')
-		.optional(),
-	street2: Joi.string()
-		.allow('')
-		.optional(),
-	city: Joi.string()
-		.allow('')
-		.optional(),
-	zip: Joi.string()
-		.allow('')
-		.optional(),
-	country: Joi.string()
-		.allow('')
-		.optional(),
-}).or('email', 'phoneNumber');
-
-export const corsignPayloadPersonPositiveTestSchema = Joi.object<
-	CorsignPayloadPerson
->({
-	idCardNumber: Joi.string()
-		.allow('')
-		.optional(),
-	firstname: Joi.string().required(),
-	lastname: Joi.string().required(),
-	sex: Joi.string()
-		.valid('F', 'M', 'D')
-		.optional(),
-	birthday: Joi.string().optional(),
-	email: Joi.string()
-		.email({ tlds: { allow: false } })
-		.optional(),
-	phoneNumber: Joi.string()
-		.allow('')
-		.optional(),
 	street1: Joi.string().optional(),
 	street2: Joi.string()
 		.allow('')
 		.optional(),
-	city: Joi.string().optional(),
-	zip: Joi.string().optional(),
-	country: Joi.string().optional(),
+	city: Joi.string().required(),
+	zip: Joi.string().required(),
+	country: Joi.string().required(),
 })
 	.or('email', 'phoneNumber')
 	.or('street1', 'street2');
@@ -209,23 +174,13 @@ export type CorsignPayloadInformation = {
 export const corsignPayloadInformationSchema = Joi.object<
 	CorsignPayloadInformation
 >({
-	carriedOutBy: Joi.string()
-		.allow('')
-		.optional(),
-	creatorType: Joi.string()
-		.allow('')
-		.optional(),
-	isNegative: Joi.boolean().optional(),
-	invalid: Joi.boolean().optional(),
-	testType: Joi.string()
-		.allow('')
-		.optional(),
-	testName: Joi.string()
-		.allow('')
-		.optional(),
-	testManufacturer: Joi.string()
-		.allow('')
-		.optional(),
+	carriedOutBy: Joi.string().required(),
+	creatorType: Joi.string().required(),
+	isNegative: Joi.boolean().required(),
+	invalid: Joi.boolean().required(),
+	testType: Joi.string().required(),
+	testName: Joi.string().required(),
+	testManufacturer: Joi.string().required(),
 	isVaccinated: Joi.boolean().optional(),
 	vaccine: Joi.string()
 		.allow('')
@@ -247,11 +202,7 @@ export type CorsignPayload = {
 };
 
 export const corsignPayloadSchema = Joi.object<CorsignPayload>({
-	person: Joi.alternatives().conditional('information.isNegative', {
-		is: false,
-		then: corsignPayloadPersonPositiveTestSchema,
-		otherwise: corsignPayloadPersonSchema,
-	}),
+	person: corsignPayloadPersonSchema,
 	information: corsignPayloadInformationSchema,
 });
 

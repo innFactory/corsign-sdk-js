@@ -1,24 +1,35 @@
 import {
-	CorsignPayload,
+	CorsignPayloadInformation,
+	corsignPayloadInformationSchema,
 	CorsignPayloadPerson,
-	corsignPayloadPersonPositiveTestSchema,
 	corsignPayloadPersonSchema,
-	corsignPayloadSchema,
 } from '../src/token';
 
 describe('person payload schema validation', () => {
+	test('person no payload should fail validation', () => {
+		const personPayload = {};
+
+		const validationResult = corsignPayloadPersonSchema.validate(
+			personPayload
+		);
+		expect(validationResult.error).toBeDefined();
+	});
+
 	test('person payload phoneNumber and email empty should fail validation', () => {
 		const personPayload: CorsignPayloadPerson = {
 			firstname: 'Max',
 			lastname: 'Mustermann',
-			sex: 'M',
 			birthday: '2020-04-21',
+			street1: 'Teststraße',
+			zip: '12345',
+			city: 'Teststadt',
+			country: 'DE',
 		};
 
 		const validationResult = corsignPayloadPersonSchema.validate(
 			personPayload
 		);
-		expect(() => validationResult.error !== undefined);
+		expect(validationResult.error).toBeDefined();
 	});
 
 	test('person payload with phoneNumber should pass validation ', () => {
@@ -26,14 +37,17 @@ describe('person payload schema validation', () => {
 			firstname: 'Max',
 			lastname: 'Mustermann',
 			phoneNumber: '+49 123 456 78',
-			sex: 'M',
 			birthday: '2020-04-21',
+			street1: 'Teststraße',
+			zip: '12345',
+			city: 'Teststadt',
+			country: 'DE',
 		};
 
 		const validationResult = corsignPayloadPersonSchema.validate(
 			personPayload
 		);
-		expect(() => validationResult.error === undefined);
+		expect(validationResult.error).toBeUndefined();
 	});
 
 	test('person payload with phoneNumber and email should pass validation ', () => {
@@ -42,208 +56,82 @@ describe('person payload schema validation', () => {
 			lastname: 'Mustermann',
 			phoneNumber: '+49 123 456 78',
 			email: 'max@mustermann.de',
-			sex: 'M',
 			birthday: '2020-04-21',
+			street1: 'Teststraße',
+			zip: '12345',
+			city: 'Teststadt',
+			country: 'DE',
 		};
 
 		const validationResult = corsignPayloadPersonSchema.validate(
 			personPayload
 		);
-		expect(() => validationResult.error === undefined);
-	});
-});
-
-describe('person payload for positive test schema validation', () => {
-	test('phoneNumber and email empty should fail validation', () => {
-		const personPayload: CorsignPayloadPerson = {
-			firstname: 'Max',
-			lastname: 'Mustermann',
-			sex: 'M',
-			birthday: '2020-04-21',
-			street1: 'Musterstraße',
-			zip: '123456',
-			city: 'Musterstadt',
-			country: 'DE',
-		};
-
-		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
-			personPayload
-		);
-		expect(() => validationResult.error !== undefined);
+		expect(validationResult.error).toBeUndefined();
 	});
 
-	test('with phoneNumber should pass validation ', () => {
-		const personPayload: CorsignPayloadPerson = {
-			firstname: 'Max',
-			lastname: 'Mustermann',
-			phoneNumber: '+49 123 456 78',
-			sex: 'M',
-			birthday: '2020-04-21',
-			street1: 'Musterstraße',
-			zip: '123456',
-			city: 'Musterstadt',
-			country: 'DE',
-		};
-
-		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
-			personPayload
-		);
-		expect(() => validationResult.error === undefined);
-	});
-
-	test('with phoneNumber and email should pass validation ', () => {
+	test('person payload with street1 should pass validation ', () => {
 		const personPayload: CorsignPayloadPerson = {
 			firstname: 'Max',
 			lastname: 'Mustermann',
 			phoneNumber: '+49 123 456 78',
 			email: 'max@mustermann.de',
-			sex: 'M',
 			birthday: '2020-04-21',
-			street1: 'Musterstraße',
-			zip: '123456',
-			city: 'Musterstadt',
+			street1: 'Teststraße',
+			zip: '12345',
+			city: 'Teststadt',
 			country: 'DE',
 		};
 
-		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
-			personPayload
-		);
-		expect(() => validationResult.error === undefined);
-	});
-
-	test('street1 and street2 empty string should fail validation', () => {
-		const personPayload: CorsignPayloadPerson = {
-			firstname: 'Max',
-			lastname: 'Mustermann',
-			email: 'max@mustermann.de',
-			sex: 'M',
-			birthday: '2020-04-21',
-			street1: '',
-			street2: '',
-			zip: '123456',
-			city: 'Musterstadt',
-			country: 'DE',
-		};
-
-		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
-			personPayload
-		);
-		expect(validationResult.error).toBeDefined();
-	});
-
-	test('street1 and street2 filled in should pass validation', () => {
-		const personPayload: CorsignPayloadPerson = {
-			firstname: 'Max',
-			lastname: 'Mustermann',
-			email: 'max@mustermann.de',
-			sex: 'M',
-			birthday: '2020-04-21',
-			street1: 'Musterstraße 1',
-			street2: 'Musterstraße 2',
-			zip: '123456',
-			city: 'Musterstadt',
-			country: 'DE',
-		};
-
-		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
+		const validationResult = corsignPayloadPersonSchema.validate(
 			personPayload
 		);
 		expect(validationResult.error).toBeUndefined();
 	});
 
-	test('street1 filled in should pass validation', () => {
+	test('person payload with street2 should pass validation ', () => {
 		const personPayload: CorsignPayloadPerson = {
 			firstname: 'Max',
 			lastname: 'Mustermann',
+			phoneNumber: '+49 123 456 78',
 			email: 'max@mustermann.de',
-			sex: 'M',
 			birthday: '2020-04-21',
-			street1: 'Musterstraße 1',
-			street2: '',
-			zip: '123456',
-			city: 'Musterstadt',
-			country: 'DE',
-		};
-		const personPayload2: CorsignPayloadPerson = {
-			firstname: 'Max',
-			lastname: 'Mustermann',
-			email: 'max@mustermann.de',
-			sex: 'M',
-			birthday: '2020-04-21',
-			street1: 'Musterstraße 1',
-			street2: undefined,
-			zip: '123456',
-			city: 'Musterstadt',
+			street2: 'Teststraße',
+			zip: '12345',
+			city: 'Teststadt',
 			country: 'DE',
 		};
 
-		const validationResult = corsignPayloadPersonPositiveTestSchema.validate(
+		const validationResult = corsignPayloadPersonSchema.validate(
 			personPayload
 		);
-		const validationResult2 = corsignPayloadPersonPositiveTestSchema.validate(
-			personPayload2
-		);
 		expect(validationResult.error).toBeUndefined();
-		expect(validationResult2.error).toBeUndefined();
 	});
 });
 
-describe('payload schema validation', () => {
-	test('payload with positive test requires address, but no address given', () => {
-		const payload: CorsignPayload = {
-			person: {
-				firstname: 'Max',
-				lastname: 'Mustermann',
-				phoneNumber: '+49 123 456 78',
-				sex: 'M',
-				birthday: '2020-04-21',
-			},
-			information: {
-				isNegative: false,
-			},
-		};
+describe('corsign payload information schema validation', () => {
+	test('no payload should fail validation', () => {
+		const informationPayload = {};
 
-		const validationResult = corsignPayloadSchema.validate(payload);
+		const validationResult = corsignPayloadInformationSchema.validate(
+			informationPayload
+		);
 		expect(validationResult.error).toBeDefined();
 	});
 
-	test('payload with positive test requires address, address given', () => {
-		const payload: CorsignPayload = {
-			person: {
-				firstname: 'Max',
-				lastname: 'Mustermann',
-				phoneNumber: '+49 123 456 78',
-				sex: 'M',
-				birthday: '2020-04-21',
-				street1: 'Musterstraße',
-				zip: '123456',
-				city: 'Musterstadt',
-				country: 'DE',
-			},
-			information: {
-				isNegative: false,
-			},
+	test('minimal payload should pass validation', () => {
+		const informationPayload: CorsignPayloadInformation = {
+			carriedOutBy: 'Tester',
+			creatorType: 'on-site',
+			isNegative: true,
+			invalid: false,
+			testType: 'pcr-test',
+			testName: 'Testname',
+			testManufacturer: 'Test',
 		};
 
-		const validationResult = corsignPayloadSchema.validate(payload);
-		expect(validationResult.error).toBeUndefined();
-	});
-
-	test('payload with negative test does not require address', () => {
-		const payload: CorsignPayload = {
-			person: {
-				firstname: 'Max',
-				lastname: 'Mustermann',
-				phoneNumber: '+49 123 456 78',
-				sex: 'M',
-				birthday: '2020-04-21',
-			},
-			information: {
-				isNegative: true,
-			},
-		};
-
-		const validationResult = corsignPayloadSchema.validate(payload);
+		const validationResult = corsignPayloadInformationSchema.validate(
+			informationPayload
+		);
 		expect(validationResult.error).toBeUndefined();
 	});
 });
