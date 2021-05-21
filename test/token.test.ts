@@ -32,7 +32,7 @@ describe('person payload schema validation', () => {
 		expect(validationResult.error).toBeDefined();
 	});
 
-	test('person payload with phoneNumber should pass validation ', () => {
+	test('person payload without email should fail validation ', () => {
 		const personPayload: CorsignPayloadPerson = {
 			firstname: 'Max',
 			lastname: 'Mustermann',
@@ -47,7 +47,25 @@ describe('person payload schema validation', () => {
 		const validationResult = corsignPayloadPersonSchema.validate(
 			personPayload
 		);
-		expect(validationResult.error).toBeUndefined();
+		expect(validationResult.error).toBeDefined();
+	});
+
+	test('person payload without phoneNumber should fail validation ', () => {
+		const personPayload: CorsignPayloadPerson = {
+			firstname: 'Max',
+			lastname: 'Mustermann',
+			email: 'max@mustermann.de',
+			birthday: '2020-04-21',
+			street1: 'Teststraße',
+			zip: '12345',
+			city: 'Teststadt',
+			country: 'DE',
+		};
+
+		const validationResult = corsignPayloadPersonSchema.validate(
+			personPayload
+		);
+		expect(validationResult.error).toBeDefined();
 	});
 
 	test('person payload with phoneNumber and email should pass validation ', () => {

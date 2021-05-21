@@ -86,10 +86,8 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 	birthday: Joi.string().required(),
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
-		.optional(),
-	phoneNumber: Joi.string()
-		.allow('')
-		.optional(),
+		.required(),
+	phoneNumber: Joi.string().required(),
 	street1: Joi.string().optional(),
 	street2: Joi.string()
 		.allow('')
@@ -97,9 +95,7 @@ export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
 	city: Joi.string().required(),
 	zip: Joi.string().required(),
 	country: Joi.string().required(),
-})
-	.or('email', 'phoneNumber')
-	.or('street1', 'street2');
+}).or('street1', 'street2');
 
 /**
  * Covid19 relevant data and optional third-party application data
