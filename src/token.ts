@@ -142,6 +142,11 @@ export type CorsignPayloadInformation = {
 	testManufacturer?: string;
 
 	/**
+	 * Mostly a number which depends on the test. All Test-Ids are defined here (Device ID): https://ec.europa.eu/health/sites/default/files/preparedness_response/docs/covid-19_rat_common-list_en.pdf
+	 */
+	testId?: string;
+
+	/**
 	 * Wether or not the [CorsignPayloadPerson] was vaccinated or not
 	 */
 	isVaccinated?: boolean;
