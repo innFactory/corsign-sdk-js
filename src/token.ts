@@ -182,6 +182,9 @@ export const corsignPayloadInformationSchema = Joi.object<
 	testType: Joi.string().required(),
 	testName: Joi.string().required(),
 	testManufacturer: Joi.string().required(),
+	testId: Joi.string()
+		.optional()
+		.allow(''),
 	isVaccinated: Joi.boolean().optional(),
 	vaccine: Joi.string()
 		.allow('')

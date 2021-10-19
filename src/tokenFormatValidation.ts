@@ -98,6 +98,7 @@ export const hasFormatOfCorsignPayloadInformation = (
 		testManufacturer,
 		isNegative,
 		testType,
+		testId,
 		isVaccinated,
 		vaccine,
 		appData1,
@@ -113,6 +114,7 @@ export const hasFormatOfCorsignPayloadInformation = (
 		isDefinedButNoBoolean(invalid) ||
 		isDefinedButNoBoolean(isNegative) ||
 		isDefinedButNoString(testType) ||
+		isDefinedButNoString(testId) ||
 		isDefinedButNoBoolean(isVaccinated) ||
 		isDefinedButNoString(vaccine) ||
 		isDefinedButNoObject(appData1) ||
