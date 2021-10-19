@@ -40,11 +40,11 @@
 	"size-limit": [
 		{
 			"path": "dist/corsign-sdk-js.cjs.production.min.js",
-			"limit": "10 KB"
+			"limit": "220 KB"
 		},
 		{
 			"path": "dist/corsign-sdk-js.esm.js",
-			"limit": "10 KB"
+			"limit": "220 KB"
 		}
 	],
 	"devDependencies": {
