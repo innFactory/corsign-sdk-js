@@ -50,6 +50,7 @@
 	"devDependencies": {
 		"@size-limit/preset-small-lib": "^4.10.2",
 		"@types/crypto-js": "^4.0.1",
+		"@types/jest": "^27.0.2",
 		"@types/jsonwebtoken": "^8.5.1",
 		"@types/qrcode": "^1.4.0",
 		"eslint-plugin-tsdoc": "^0.2.11",
