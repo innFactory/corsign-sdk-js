@@ -26,12 +26,10 @@ export const hasFormatOfCorsignPayload = (payload: any): boolean => {
 	}
 
 	const { person, information } = payload;
-	const isCorsignPayloadPersonFormat = hasFormatOfCorsignPayloadPerson(
-		person
-	);
-	const isCorsingPayloadInformationFormat = hasFormatOfCorsignPayloadInformation(
-		information
-	);
+	const isCorsignPayloadPersonFormat =
+		hasFormatOfCorsignPayloadPerson(person);
+	const isCorsingPayloadInformationFormat =
+		hasFormatOfCorsignPayloadInformation(information);
 
 	if (
 		!isCorsignPayloadPersonFormat ||
@@ -98,6 +96,7 @@ export const hasFormatOfCorsignPayloadInformation = (
 		testManufacturer,
 		isNegative,
 		testType,
+		testId,
 		isVaccinated,
 		vaccine,
 		appData1,
@@ -113,6 +112,7 @@ export const hasFormatOfCorsignPayloadInformation = (
 		isDefinedButNoBoolean(invalid) ||
 		isDefinedButNoBoolean(isNegative) ||
 		isDefinedButNoString(testType) ||
+		isDefinedButNoString(testId) ||
 		isDefinedButNoBoolean(isVaccinated) ||
 		isDefinedButNoString(vaccine) ||
 		isDefinedButNoObject(appData1) ||
