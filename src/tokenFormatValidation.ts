@@ -26,10 +26,12 @@ export const hasFormatOfCorsignPayload = (payload: any): boolean => {
 	}
 
 	const { person, information } = payload;
-	const isCorsignPayloadPersonFormat =
-		hasFormatOfCorsignPayloadPerson(person);
-	const isCorsingPayloadInformationFormat =
-		hasFormatOfCorsignPayloadInformation(information);
+	const isCorsignPayloadPersonFormat = hasFormatOfCorsignPayloadPerson(
+		person
+	);
+	const isCorsingPayloadInformationFormat = hasFormatOfCorsignPayloadInformation(
+		information
+	);
 
 	if (
 		!isCorsignPayloadPersonFormat ||

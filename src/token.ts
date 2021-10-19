@@ -75,17 +75,23 @@ export type CorsignPayloadPerson = {
 };
 
 export const corsignPayloadPersonSchema = Joi.object<CorsignPayloadPerson>({
-	idCardNumber: Joi.string().allow('').optional(),
+	idCardNumber: Joi.string()
+		.allow('')
+		.optional(),
 	firstname: Joi.string().required(),
 	lastname: Joi.string().required(),
-	sex: Joi.string().valid('F', 'M', 'D').optional(),
+	sex: Joi.string()
+		.valid('F', 'M', 'D')
+		.optional(),
 	birthday: Joi.string().required(),
 	email: Joi.string()
 		.email({ tlds: { allow: false } })
 		.required(),
 	phoneNumber: Joi.string().required(),
 	street1: Joi.string().optional(),
-	street2: Joi.string().allow('').optional(),
+	street2: Joi.string()
+		.allow('')
+		.optional(),
 	city: Joi.string().required(),
 	zip: Joi.string().required(),
 	country: Joi.string().required(),
@@ -166,21 +172,26 @@ export type CorsignPayloadInformation = {
 	isImmune?: boolean;
 };
 
-export const corsignPayloadInformationSchema =
-	Joi.object<CorsignPayloadInformation>({
-		carriedOutBy: Joi.string().required(),
-		creatorType: Joi.string().required(),
-		isNegative: Joi.boolean().required(),
-		invalid: Joi.boolean().required(),
-		testType: Joi.string().required(),
-		testName: Joi.string().required(),
-		testManufacturer: Joi.string().required(),
-		testId: Joi.string().optional().allow(''),
-		isVaccinated: Joi.boolean().optional(),
-		vaccine: Joi.string().allow('').optional(),
-		appData1: Joi.any().optional(),
-		appData2: Joi.any().optional(),
-	});
+export const corsignPayloadInformationSchema = Joi.object<
+	CorsignPayloadInformation
+>({
+	carriedOutBy: Joi.string().required(),
+	creatorType: Joi.string().required(),
+	isNegative: Joi.boolean().required(),
+	invalid: Joi.boolean().required(),
+	testType: Joi.string().required(),
+	testName: Joi.string().required(),
+	testManufacturer: Joi.string().required(),
+	testId: Joi.string()
+		.optional()
+		.allow(''),
+	isVaccinated: Joi.boolean().optional(),
+	vaccine: Joi.string()
+		.allow('')
+		.optional(),
+	appData1: Joi.any().optional(),
+	appData2: Joi.any().optional(),
+});
 
 export type CorsignPayload = {
 	/**
